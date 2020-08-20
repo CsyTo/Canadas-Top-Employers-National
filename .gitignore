@@ -1,0 +1,9 @@
+*.csv
+tmp
+*.csv.gz
+data-out
+gs_client_secrets.json
+.DS_Store
+scripts/helpers/__pycache__
+scripts/scrapers/__pycache__
+__pycache__

@@ -1,0 +1,12 @@
+version: "2"
+
+services:
+  scraper:
+    build: .
+    command: python scrape.py CanadasTop100_National
+    volumes:
+      - .:/app
+    environment:
+      GS_PROJECT: swarm-prod
+      GS_BUCKET: tdw-puppeteer-prod
+      GS_CLIENT_SECRETS:
