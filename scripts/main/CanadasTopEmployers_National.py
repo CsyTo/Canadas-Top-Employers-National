@@ -5,6 +5,7 @@ import re
 import shutil
 import pandas as pd
 import requests
+import os
 from bs4 import BeautifulSoup
 import string
 import time
@@ -38,6 +39,13 @@ class CanadasTop100_National(Base):
     def scrape_records(self):
         url = 'https://www.canadastop100.com/national/'
         page = requests.get(url)
+        if "PROXY_URL" in os.environ:
+            puppeteer_proxies = {
+                    "http": os.environ['PROXY_URL'],
+                    "https": os.environ['PROXY_URL']
+                }
+            page = requests.get(url, proxies=puppeteer_proxies)
+
         soup = BeautifulSoup(page.content, 'html.parser')
         results = soup.find_all('div', class_='col-md-4')
         company_names = []
