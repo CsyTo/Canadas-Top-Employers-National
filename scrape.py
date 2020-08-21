@@ -16,7 +16,7 @@ def parse_args():
 def main():
     args = parse_args()
     FileHelper.make_tmp()
-    eval(args['alias'])("CanadasTop100",args['alias']).call()
+    eval(args['alias'])("CanadasTop100_National",args['alias']).call()
 
 if __name__ == '__main__':
     main()
