@@ -37,6 +37,7 @@ class CanadasTop100_National(Base):
         self.archive(self.merged)
 
     def scrape_records(self):
+        self.log.info("Scraping records....")
         url = 'https://www.canadastop100.com/national/'
         page = requests.get(url)
         if "PROXY_URL" in os.environ:
@@ -54,10 +55,11 @@ class CanadasTop100_National(Base):
                 company_names.append(tag.text)
 
         df = pd.DataFrame(company_names, columns = ['company_name'])
+        df['year'] = datetime.datetime.today().strftime("%Y")
         df['country'] = 'CANADA'
         df['source_url'] = url
         df['retrieved_at'] = datetime.datetime.today().strftime("%Y-%m-%d")
-        print(df)
+        df.to_csv(self.records, index=False)
         return df
 
 
